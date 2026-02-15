@@ -1,0 +1,50 @@
+Headline Keyword Filter — Test Sites
+=====================================
+
+Major US News:
+- CNN               https://www.cnn.com
+- NBC News          https://www.nbcnews.com
+- ABC News          https://abcnews.go.com
+- CBS News          https://www.cbsnews.com
+- MSNBC             https://www.msnbc.com
+- Fox News          https://www.foxnews.com
+- NPR               https://www.npr.org
+- PBS NewsHour      https://www.pbs.org/newshour
+
+Newspapers:
+- New York Times    https://www.nytimes.com
+- Washington Post   https://www.washingtonpost.com
+- USA Today         https://www.usatoday.com
+- Wall Street Journal https://www.wsj.com
+- Los Angeles Times https://www.latimes.com
+
+Aggregators & Portals:
+- Yahoo News        https://news.yahoo.com
+- Google News       https://news.google.com
+- Microsoft Start   https://www.microsoftstart.com
+- Flipboard         https://www.flipboard.com
+
+Video:
+- YouTube           https://www.youtube.com
+
+Social/Discussion:
+- Reddit            https://www.reddit.com/r/news
+- Reddit            https://www.reddit.com/r/politics
+- Twitter/X         https://www.x.com
+
+International:
+- BBC News          https://www.bbc.com/news
+- The Guardian      https://www.theguardian.com
+- Reuters           https://www.reuters.com
+- AP News           https://www.apnews.com
+
+Tech/Business/Political:
+- Bloomberg         https://www.bloomberg.com
+- CNBC              https://www.cnbc.com
+- The Hill          https://thehill.com
+- Politico          https://www.politico.com
+
+Test Notes:
+- For each site, check front page + any politics/opinion sections
+- Press Ctrl+Shift+D on any page to download diagnostic log
+- Green badge in top-right confirms extension is running
