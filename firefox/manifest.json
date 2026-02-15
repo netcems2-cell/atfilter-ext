@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ATfilter",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Hide articles, videos, and posts whose headlines contain keywords you choose",
   "browser_specific_settings": {
     "gecko": {
@@ -13,8 +13,12 @@
     }
   },
   "permissions": [
-    "storage"
+    "storage",
+    "alarms"
   ],
+  "background": {
+    "scripts": ["background.js"]
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

@@ -9,31 +9,31 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       width: 350px;
       padding: 20px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
       background: #f5f5f5;
     }
-    
+
     h2 {
       color: #333;
       margin-bottom: 15px;
       font-size: 18px;
     }
-    
+
     .description {
       color: #666;
       font-size: 13px;
       margin-bottom: 15px;
       line-height: 1.4;
     }
-    
+
     .input-group {
       margin-bottom: 15px;
     }
-    
+
     label {
       display: block;
       margin-bottom: 5px;
@@ -41,7 +41,7 @@
       font-size: 13px;
       font-weight: 500;
     }
-    
+
     textarea {
       width: 100%;
       padding: 10px;
@@ -52,18 +52,18 @@
       resize: vertical;
       min-height: 80px;
     }
-    
+
     textarea:focus {
       outline: none;
       border-color: #4CAF50;
     }
-    
+
     .button-group {
       display: flex;
       gap: 10px;
       margin-bottom: 15px;
     }
-    
+
     button {
       flex: 1;
       padding: 10px;
@@ -74,25 +74,25 @@
       font-weight: 500;
       transition: background-color 0.2s;
     }
-    
+
     #save {
       background: #4CAF50;
       color: white;
     }
-    
+
     #save:hover {
       background: #45a049;
     }
-    
+
     #clear {
       background: #f44336;
       color: white;
     }
-    
+
     #clear:hover {
       background: #da190b;
     }
-    
+
     #status {
       padding: 10px;
       border-radius: 4px;
@@ -100,19 +100,19 @@
       text-align: center;
       display: none;
     }
-    
+
     #status.success {
       background: #d4edda;
       color: #155724;
       display: block;
     }
-    
+
     #status.error {
       background: #f8d7da;
       color: #721c24;
       display: block;
     }
-    
+
     .preset-keywords {
       margin-top: 10px;
       padding: 10px;
@@ -120,13 +120,13 @@
       border-radius: 4px;
       border: 1px solid #ddd;
     }
-    
+
     .preset-keywords p {
       font-size: 12px;
       color: #666;
       margin-bottom: 8px;
     }
-    
+
     .preset-btn {
       display: inline-block;
       padding: 5px 10px;
@@ -138,11 +138,11 @@
       font-size: 11px;
       transition: background-color 0.2s;
     }
-    
+
     .preset-btn:hover {
       background: #d0d0d0;
     }
-    
+
     .stats {
       margin-top: 15px;
       padding: 10px;
@@ -160,24 +160,34 @@
   <div class="description">
     Hide articles, videos, and posts whose headlines contain your chosen keywords.
   </div>
-  
+
   <div class="input-group">
     <label for="keywords">Filter Keywords (one per line):</label>
     <textarea id="keywords" placeholder="keyword1&#10;keyword2&#10;keyword3"></textarea>
   </div>
-  
+
   <div class="button-group">
     <button id="save">💾 Save & Filter</button>
     <button id="clear">🗑️ Clear All</button>
   </div>
-  
+
   <div id="status"></div>
-  
+
   <div class="stats">
     <div><strong>Active keywords:</strong> <span id="keyword-count">0</span></div>
     <div style="margin-top: 5px; font-size: 11px; color: #999;">
       Extension will filter content automatically as pages load.
     </div>
+  </div>
+
+  <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 4px; border: 1px solid #ddd;">
+    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: #555;">
+      <input type="checkbox" id="telemetry-toggle" style="cursor: pointer;">
+      <span>Help improve @Filter by sharing anonymous usage data</span>
+    </label>
+    <p style="margin-top: 5px; font-size: 10px; color: #999; line-height: 1.3;">
+      When enabled, anonymous keyword and suppression counts are sent to improve filtering. No personal data, browsing history, or IP addresses are stored.
+    </p>
   </div>
 
   <div style="margin-top: 10px;">

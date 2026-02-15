@@ -5,6 +5,20 @@
   let filterKeywords = [];
   let processedElements = new WeakSet();
 
+  // --- Signal Engine telemetry state ---
+  let sessionId = null;
+  let telemetryEnabled = false;
+  chrome.storage.local.get(['session_id', 'telemetry_enabled'], (result) => {
+    sessionId = result.session_id || null;
+    telemetryEnabled = result.telemetry_enabled || false;
+  });
+  chrome.storage.onChanged.addListener((changes, namespace) => {
+    if (namespace === 'local') {
+      if (changes.telemetry_enabled) telemetryEnabled = changes.telemetry_enabled.newValue || false;
+      if (changes.session_id) sessionId = changes.session_id.newValue || null;
+    }
+  });
+
   // --- Diagnostic logging ---
   // Stores structured entries so the popup can retrieve them for debugging.
   const diagLog = [];
@@ -192,17 +206,61 @@
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
+  // --- Signal Engine helpers ---
+
+  function emitSuppressionEvent(keyword, domain, count, scannedCount, latencyMs) {
+    if (!telemetryEnabled) return;
+    try {
+      chrome.runtime.sendMessage({
+        type: 'suppression_event',
+        data: {
+          keyword_raw: keyword,
+          domain: domain,
+          platform_type: detectPlatformType(domain),
+          page_context: detectPageContext(),
+          suppressed_count: Math.min(count, 500),
+          scanned_count_est: scannedCount,
+          client_latency_ms: latencyMs,
+        }
+      });
+    } catch (e) { /* extension context invalidated */ }
+  }
+
+  function detectPlatformType(domain) {
+    if (!domain) return 'other';
+    const d = domain.toLowerCase();
+    const social = ['facebook.com','twitter.com','x.com','reddit.com','instagram.com','linkedin.com','threads.net','mastodon.social','bsky.app','tiktok.com'];
+    const news = ['cnn.com','bbc.com','bbc.co.uk','nytimes.com','foxnews.com','reuters.com','apnews.com','washingtonpost.com','theguardian.com','nbcnews.com','abcnews.go.com','usatoday.com','news.google.com','news.yahoo.com','msn.com'];
+    const video = ['youtube.com','youtu.be','vimeo.com','twitch.tv','dailymotion.com'];
+    if (social.some(s => d.includes(s))) return 'social';
+    if (news.some(s => d.includes(s))) return 'news';
+    if (video.some(s => d.includes(s))) return 'video';
+    return 'other';
+  }
+
+  function detectPageContext() {
+    const path = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+    if (path === '/' || path === '') return 'homepage';
+    if (search.includes('q=') || search.includes('query=') || path.includes('/search')) return 'search';
+    if (path.includes('/feed') || path.includes('/home') || path.includes('/trending')) return 'feed';
+    return 'article';
+  }
+
   function containsKeyword(element) {
-    if (!element || processedElements.has(element)) return false;
+    return findMatchingKeyword(element) !== null;
+  }
+
+  function findMatchingKeyword(element) {
+    if (!element || processedElements.has(element)) return null;
     const text = getElementText(element);
-    if (!text || text.length < 3) return false;
-    // Real headlines are short. Long text means this is a container, not a headline.
-    // (CNN's section wrappers have "headline" in class names and thousands of chars of child text)
-    if (text.length > 300) return false;
-    return filterKeywords.some(keyword => {
+    if (!text || text.length < 3) return null;
+    if (text.length > 300) return null;
+    for (const keyword of filterKeywords) {
       const pattern = new RegExp(`\\b${escapeRegExp(keyword)}\\b`, 'i');
-      return pattern.test(text);
-    });
+      if (pattern.test(text)) return keyword;
+    }
+    return null;
   }
 
   // --- Three-tier container detection ---
@@ -426,16 +484,20 @@
 
   function filterContent() {
     if (filterKeywords.length === 0) return;
+    const t0 = performance.now();
     let filteredCount = 0;
+    const keywordHits = {};
     const allHeadlines = document.querySelectorAll(HEADLINE_SELECTORS.join(', '));
 
     allHeadlines.forEach(headline => {
       try {
-        if (containsKeyword(headline)) {
+        const matched = findMatchingKeyword(headline);
+        if (matched) {
           diag('keywordHit', { el: describeEl(headline) });
           const contentUnit = findContentUnit(headline);
           if (contentUnit && hideContentUnit(contentUnit)) {
             filteredCount++;
+            keywordHits[matched] = (keywordHits[matched] || 0) + 1;
             hideRelatedLinks(headline, contentUnit);
           }
         }
@@ -444,9 +506,20 @@
       }
     });
 
+    const latencyMs = Math.round(performance.now() - t0);
+
     if (filteredCount > 0) {
       diag('filterRun', { hidden: filteredCount, host: window.location.hostname });
       console.log(`[ATfilter] Hidden ${filteredCount} item(s) on ${window.location.hostname}`);
+
+      // Emit suppression events per keyword
+      if (telemetryEnabled) {
+        const domain = window.location.hostname;
+        const scannedCount = allHeadlines.length;
+        for (const [keyword, count] of Object.entries(keywordHits)) {
+          emitSuppressionEvent(keyword, domain, count, scannedCount, latencyMs);
+        }
+      }
     }
   }
 

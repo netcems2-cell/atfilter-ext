@@ -6,34 +6,46 @@ document.addEventListener('DOMContentLoaded', function() {
   const keywordCountSpan = document.getElementById('keyword-count');
   const presetButtons = document.querySelectorAll('.preset-btn');
 
+  // --- Telemetry toggle ---
+  const telemetryToggle = document.getElementById('telemetry-toggle');
+  chrome.storage.local.get(['telemetry_enabled'], function(result) {
+    telemetryToggle.checked = result.telemetry_enabled || false;
+  });
+  telemetryToggle.addEventListener('change', function() {
+    chrome.storage.local.set({ telemetry_enabled: telemetryToggle.checked });
+  });
+
   // Load existing keywords
+  let previousKeywords = [];
   function loadKeywords() {
     chrome.storage.local.get(['filterKeywords'], function(result) {
       if (result.filterKeywords && result.filterKeywords.length > 0) {
+        previousKeywords = result.filterKeywords.slice();
         keywordsTextarea.value = result.filterKeywords.join('\n');
         updateKeywordCount(result.filterKeywords.length);
       } else {
+        previousKeywords = [];
         updateKeywordCount(0);
       }
     });
   }
-  
+
   // Update keyword count display
   function updateKeywordCount(count) {
     keywordCountSpan.textContent = count;
   }
-  
+
   // Show status message
   function showStatus(message, isSuccess = true) {
     statusDiv.textContent = message;
     statusDiv.className = isSuccess ? 'success' : 'error';
-    
+
     setTimeout(() => {
       statusDiv.style.display = 'none';
       statusDiv.className = '';
     }, 3000);
   }
-  
+
   // Save keywords
   function saveKeywords() {
     const text = keywordsTextarea.value;
@@ -41,18 +53,38 @@ document.addEventListener('DOMContentLoaded', function() {
       .split('\n')
       .map(k => k.trim().toLowerCase())
       .filter(k => k.length > 0);
-    
+
     if (keywords.length === 0) {
       showStatus('Please enter at least one keyword', false);
       return;
     }
-    
+
+    // Diff against previous keywords for event emission
+    const added = keywords.filter(k => !previousKeywords.includes(k));
+    const removed = previousKeywords.filter(k => !keywords.includes(k));
+
     chrome.storage.local.set({ filterKeywords: keywords }, function() {
       updateKeywordCount(keywords.length);
       showStatus(`Saved ${keywords.length} keyword${keywords.length === 1 ? '' : 's'}. Active tabs will update automatically.`);
+
+      // Emit keyword config events
+      for (const kw of added) {
+        chrome.runtime.sendMessage({
+          type: 'keyword_event',
+          data: { event_type: 'added', keyword_raw: kw }
+        });
+      }
+      for (const kw of removed) {
+        chrome.runtime.sendMessage({
+          type: 'keyword_event',
+          data: { event_type: 'removed', keyword_raw: kw }
+        });
+      }
+
+      previousKeywords = keywords.slice();
     });
   }
-  
+
   // Clear all keywords
   function clearKeywords() {
     if (confirm('Clear all filter keywords?')) {
@@ -63,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
-  
+
   // Add preset keyword
   function addPresetKeyword(keyword) {
     const currentText = keywordsTextarea.value;
@@ -71,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .split('\n')
       .map(k => k.trim().toLowerCase())
       .filter(k => k.length > 0);
-    
+
     if (!currentKeywords.includes(keyword.toLowerCase())) {
       currentKeywords.push(keyword.toLowerCase());
       keywordsTextarea.value = currentKeywords.join('\n');
@@ -80,25 +112,25 @@ document.addEventListener('DOMContentLoaded', function() {
       showStatus(`"${keyword}" already added`, false);
     }
   }
-  
+
   // Event listeners
   saveButton.addEventListener('click', saveKeywords);
   clearButton.addEventListener('click', clearKeywords);
-  
+
   presetButtons.forEach(button => {
     button.addEventListener('click', function() {
       const keyword = this.getAttribute('data-keyword');
       addPresetKeyword(keyword);
     });
   });
-  
+
   // Allow Ctrl+Enter to save
   keywordsTextarea.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.key === 'Enter') {
       saveKeywords();
     }
   });
-  
+
   // --- Debug log button ---
   const debugButton = document.getElementById('debug');
   const debugStatus = document.getElementById('debug-status');
