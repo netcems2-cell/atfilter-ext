@@ -2,20 +2,24 @@
   'use strict';
 
 
+  const FREE_KEYWORD_LIMIT = 5;
   let filterKeywords = [];
+  let isPro = false;
   let processedElements = new WeakSet();
 
   // --- Signal Engine telemetry state ---
   let sessionId = null;
   let telemetryEnabled = false;
-  chrome.storage.local.get(['session_id', 'telemetry_enabled'], (result) => {
+  chrome.storage.local.get(['session_id', 'telemetry_enabled', 'isPro'], (result) => {
     sessionId = result.session_id || null;
     telemetryEnabled = result.telemetry_enabled || false;
+    isPro = result.isPro || false;
   });
   chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local') {
       if (changes.telemetry_enabled) telemetryEnabled = changes.telemetry_enabled.newValue || false;
       if (changes.session_id) sessionId = changes.session_id.newValue || null;
+      if (changes.isPro) isPro = changes.isPro.newValue || false;
     }
   });
 
@@ -537,16 +541,22 @@
 
   function init() {
     console.log('[ATfilter] v1.0 initializing...');
-    chrome.storage.local.get(['filterKeywords'], (result) => {
+    chrome.storage.local.get(['filterKeywords', 'isPro'], (result) => {
+      isPro = result.isPro || false;
       if (result.filterKeywords && result.filterKeywords.length > 0) {
-        filterKeywords = result.filterKeywords.map(k => k.toLowerCase().trim());
+        let kws = result.filterKeywords.map(k => k.toLowerCase().trim());
+        if (!isPro && kws.length > FREE_KEYWORD_LIMIT) {
+          kws = kws.slice(0, FREE_KEYWORD_LIMIT);
+        }
+        filterKeywords = kws;
         console.log('[ATfilter] Active with keywords:', filterKeywords);
         filterContent();
         setupObserver();
-        showFilterBadge('ATfilter v1.0 ✓ ' + filterKeywords.length + ' keywords', 2500);
+        const tierLabel = isPro ? 'Pro' : 'Free';
+        showFilterBadge(`ATfilter v1.1 ${tierLabel} ✓ ${filterKeywords.length} keywords`, 2500);
       } else {
         console.log('[ATfilter] No keywords configured');
-        showFilterBadge('ATfilter v1.0 — no keywords set', 2500);
+        showFilterBadge('ATfilter v1.1 — no keywords set', 2500);
       }
     });
   }
@@ -612,7 +622,11 @@
   // --- Storage listener ---
   chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local' && changes.filterKeywords) {
-      filterKeywords = (changes.filterKeywords.newValue || []).map(k => k.toLowerCase().trim());
+      let kws = (changes.filterKeywords.newValue || []).map(k => k.toLowerCase().trim());
+      if (!isPro && kws.length > FREE_KEYWORD_LIMIT) {
+        kws = kws.slice(0, FREE_KEYWORD_LIMIT);
+      }
+      filterKeywords = kws;
       unhideAll();
       console.log('[ATfilter] Keywords updated:', filterKeywords);
       filterContent();

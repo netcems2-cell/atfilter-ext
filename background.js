@@ -2,8 +2,11 @@
 'use strict';
 
 const FLUSH_INTERVAL_MINUTES = 5;
+const LICENSE_CHECK_MINUTES = 1440; // 24 hours
 const MAX_QUEUE_SIZE = 500;
+const FREE_KEYWORD_LIMIT = 5;
 const INGEST_URL = 'https://atfilter.com/api/ingest/events';
+const VALIDATE_URL = 'https://atfilter.com/api/license/validate';
 
 // --- Event queues ---
 let keywordEvents = [];
@@ -21,12 +24,18 @@ chrome.runtime.onInstalled.addListener((details) => {
   }
   // Set up periodic flush alarm
   chrome.alarms.create('flushEvents', { periodInMinutes: FLUSH_INTERVAL_MINUTES });
+  chrome.alarms.create('validateLicense', { periodInMinutes: LICENSE_CHECK_MINUTES });
 });
 
-// Ensure alarm exists on startup
+// Ensure alarms exist on startup
 chrome.alarms.get('flushEvents', (alarm) => {
   if (!alarm) {
     chrome.alarms.create('flushEvents', { periodInMinutes: FLUSH_INTERVAL_MINUTES });
+  }
+});
+chrome.alarms.get('validateLicense', (alarm) => {
+  if (!alarm) {
+    chrome.alarms.create('validateLicense', { periodInMinutes: LICENSE_CHECK_MINUTES });
   }
 });
 
@@ -46,10 +55,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   return true;
 });
 
-// --- Alarm handler: flush queued events ---
+// --- Alarm handler: flush queued events + license check ---
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'flushEvents') {
     flushEvents();
+  } else if (alarm.name === 'validateLicense') {
+    revalidateLicense();
   }
 });
 
@@ -103,4 +114,36 @@ function detectBrowser() {
   if (ua.includes('Firefox/')) return 'firefox';
   if (ua.includes('Chrome/')) return 'chrome';
   return 'other';
+}
+
+// --- License revalidation ---
+async function revalidateLicense() {
+  const storage = await chrome.storage.local.get(['licenseKey', 'isPro']);
+  if (!storage.isPro || !storage.licenseKey) return;
+
+  try {
+    const res = await fetch(VALIDATE_URL + '?key=' + encodeURIComponent(storage.licenseKey));
+    const result = await res.json();
+
+    if (result.valid) {
+      await chrome.storage.local.set({ licenseValidatedAt: Date.now() });
+    } else {
+      // License no longer valid — downgrade to Free
+      await chrome.storage.local.set({
+        isPro: false,
+        licenseTier: null,
+        licenseValidatedAt: null,
+      });
+      // Trim keywords to Free limit
+      const kwStorage = await chrome.storage.local.get(['filterKeywords']);
+      const keywords = kwStorage.filterKeywords || [];
+      if (keywords.length > FREE_KEYWORD_LIMIT) {
+        await chrome.storage.local.set({
+          filterKeywords: keywords.slice(0, FREE_KEYWORD_LIMIT),
+        });
+      }
+    }
+  } catch {
+    // Network error — keep current state, try again next cycle
+  }
 }
