@@ -317,6 +317,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  document.getElementById('go-onboarding').addEventListener('click', () => {
+    chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
+  });
+
   document.getElementById('go-settings').addEventListener('click', () => {
     chrome.runtime.openOptionsPage();
   });
