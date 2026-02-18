@@ -296,8 +296,6 @@ We are NOT liable for:
 - Damages from unauthorized access to your device
 - Damages from reliance on @ Map data or visualizations
 
-**TOTAL LIABILITY CAP:**
-Our total liability to you for all claims related to @ Map shall not exceed $100 or the amount you paid us in the last 12 months (whichever is greater). Since @ Map is free, this effectively caps liability at $100.
 
 ### 8.5 Basis of the Bargain
 
