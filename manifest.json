@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "ATfilter",
+  "name": "@Filter™",
   "version": "1.1",
-  "description": "Hide articles, videos, and posts whose headlines contain keywords you choose",
+  "description": "@Filter™ - powerful content blocking, powering @Map™, the global sentiment platform",
+  "options_page": "settings.html",
   "permissions": [
     "storage",
     "activeTab",

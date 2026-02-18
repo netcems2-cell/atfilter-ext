@@ -12,7 +12,7 @@ const VALIDATE_URL = 'https://atfilter.com/api/license/validate';
 let keywordEvents = [];
 let suppressionEvents = [];
 
-// --- On install: generate anonymous user ID ---
+// --- On install: generate anonymous user ID + open onboarding ---
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     chrome.storage.local.set({
@@ -20,6 +20,12 @@ chrome.runtime.onInstalled.addListener((details) => {
       install_ts: new Date().toISOString(),
       telemetry_enabled: false,
       session_id: crypto.randomUUID(),
+    });
+    // Open onboarding on first install
+    chrome.storage.local.get(['onboarding_complete'], (result) => {
+      if (!result.onboarding_complete) {
+        chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
+      }
     });
   }
   // Set up periodic flush alarm
@@ -39,7 +45,13 @@ chrome.alarms.get('validateLicense', (alarm) => {
   }
 });
 
-// --- Message listener: accept events from content.js / popup.js ---
+// --- Consent helper ---
+async function checkConsent() {
+  const result = await chrome.storage.local.get(['consent_given', 'data_collection_active']);
+  return result.consent_given === true && result.data_collection_active !== false;
+}
+
+// --- Message listener: accept events from content.js / popup.js / onboarding / settings ---
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'keyword_event' && msg.data) {
     if (keywordEvents.length < MAX_QUEUE_SIZE) {
@@ -51,6 +63,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       suppressionEvents.push(msg.data);
     }
     sendResponse({ queued: true });
+  } else if (msg.type === 'startDataCollection') {
+    chrome.storage.local.set({ data_collection_active: true, telemetry_enabled: true });
+    sendResponse({ ok: true });
+  } else if (msg.type === 'stopDataCollection') {
+    chrome.storage.local.set({ data_collection_active: false, telemetry_enabled: false });
+    sendResponse({ ok: true });
   }
   return true;
 });
@@ -65,14 +83,18 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 async function flushEvents() {
-  // Check if telemetry is enabled
+  // Check if telemetry is enabled and consent is active
   const storage = await chrome.storage.local.get([
     'telemetry_enabled',
     'anon_user_id',
     'session_id',
+    'consent_given',
+    'data_collection_active',
   ]);
 
   if (!storage.telemetry_enabled) return;
+  // Guard: require active consent before sending telemetry
+  if (storage.consent_given !== true || storage.data_collection_active === false) return;
   if (!storage.anon_user_id) return;
   if (keywordEvents.length === 0 && suppressionEvents.length === 0) return;
 

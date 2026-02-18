@@ -21,15 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const deactivateRow = document.getElementById('deactivate-row');
   const deactivateBtn = document.getElementById('deactivate-btn');
 
-  // --- Telemetry toggle ---
-  const telemetryToggle = document.getElementById('telemetry-toggle');
-  chrome.storage.local.get(['telemetry_enabled'], function(result) {
-    telemetryToggle.checked = result.telemetry_enabled || false;
-  });
-  telemetryToggle.addEventListener('change', function() {
-    chrome.storage.local.set({ telemetry_enabled: telemetryToggle.checked });
-  });
-
   // --- Pro status ---
   function updateProUI(pro) {
     isPro = pro;
@@ -303,6 +294,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+  });
+
+  // Settings link
+  document.getElementById('open-settings').addEventListener('click', (e) => {
+    e.preventDefault();
+    chrome.runtime.openOptionsPage();
   });
 
   // Initialize

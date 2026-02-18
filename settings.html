@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@Filter™ Settings</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <div class="card">
+      <!-- Header -->
+      <div class="card-header">
+        <img src="logo-full.png" alt="@Filter™" class="logo-full">
+        <h1>Settings</h1>
+      </div>
+
+      <!-- Content -->
+      <div class="card-body">
+        <!-- Data Contribution Section -->
+        <section class="section">
+          <h2>Data Contribution</h2>
+          <p class="section-desc">Control whether your anonymous filtering data is shared with the @Map™ platform.</p>
+
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Contribute to @Map™</strong>
+              <p>Share anonymous filtering categories to power the global sentiment map</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="data-toggle" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-status" id="toggle-status">
+            <span class="status-dot active"></span>
+            <span id="status-text">Data sharing is active</span>
+          </div>
+        </section>
+
+        <!-- Warning Box (hidden by default) -->
+        <div id="warning-box" class="warning-box" style="display:none;">
+          <h3>Are you sure?</h3>
+          <p>Disabling data contribution means the following will be unavailable:</p>
+          <ul id="warning-list">
+            <li>Live @Map™ visualization</li>
+            <li>Regional sentiment insights</li>
+            <li>Trending filter patterns</li>
+            <li>Community features</li>
+          </ul>
+          <p class="warning-note">Basic content filtering will continue to work normally.</p>
+          <div class="warning-buttons">
+            <button id="btn-confirm-disable" class="btn btn-danger">I Understand &mdash; Disable Data Sharing</button>
+            <button id="btn-cancel" class="btn btn-keep">Keep Contributing</button>
+          </div>
+        </div>
+
+        <!-- Data Management Section -->
+        <section class="section">
+          <h2>Data Management</h2>
+          <div class="data-actions">
+            <button id="btn-view-data" class="btn btn-outline">View My Contributed Data</button>
+            <button id="btn-delete-data" class="btn btn-outline btn-outline-danger">Request Data Deletion</button>
+          </div>
+        </section>
+
+        <!-- Legal Links -->
+        <section class="section">
+          <h2>Legal</h2>
+          <div class="legal-links">
+            <a href="terms.html" target="_blank">Terms of Service</a>
+            <a href="privacy.html" target="_blank">Privacy Policy</a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast" style="display:none;"></div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
