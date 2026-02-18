@@ -302,7 +302,27 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.runtime.openOptionsPage();
   });
 
+  // --- Inactive state banner ---
+  function checkActiveState() {
+    chrome.storage.local.get(['consent_given', 'data_collection_active', 'isPro'], (result) => {
+      const active = result.isPro === true || (result.consent_given === true && result.data_collection_active !== false);
+      const banner = document.getElementById('inactive-banner');
+      if (active) {
+        banner.style.display = 'none';
+        document.body.classList.remove('inactive-mode');
+      } else {
+        banner.style.display = 'block';
+        document.body.classList.add('inactive-mode');
+      }
+    });
+  }
+
+  document.getElementById('go-settings').addEventListener('click', () => {
+    chrome.runtime.openOptionsPage();
+  });
+
   // Initialize
+  checkActiveState();
   loadLicenseState();
   loadKeywords();
 });

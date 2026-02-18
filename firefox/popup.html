@@ -152,9 +152,42 @@
       font-size: 12px;
       color: #666;
     }
+
+    #inactive-banner {
+      display: none;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #856404;
+      line-height: 1.4;
+    }
+
+    #inactive-banner a {
+      color: #6366f1;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    body.inactive-mode .input-group,
+    body.inactive-mode .button-group,
+    body.inactive-mode .stats,
+    body.inactive-mode .preset-keywords,
+    body.inactive-mode #license-section,
+    body.inactive-mode #debug {
+      opacity: 0.4;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+  <div id="inactive-banner">
+    ⚠️ <strong>@Filter™ is inactive.</strong> Enable data sharing to use filtering.
+    <br><a id="go-settings">Open Settings to re-enable →</a>
+  </div>
+
   <h2>@Filter™ <span style="font-size: 14px; font-weight: bold; color: #4CAF50;">v1.1</span> <span id="pro-badge" style="display:none; font-size:11px; font-weight:bold; color:#fff; background:#6366f1; padding:2px 8px; border-radius:10px; vertical-align:middle;">PRO</span></h2>
 
   <div class="description">

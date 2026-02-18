@@ -27,11 +27,15 @@ chrome.runtime.onInstalled.addListener((details) => {
         chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
       }
     });
+    updateIconState();
   }
   // Set up periodic flush alarm
   chrome.alarms.create('flushEvents', { periodInMinutes: FLUSH_INTERVAL_MINUTES });
   chrome.alarms.create('validateLicense', { periodInMinutes: LICENSE_CHECK_MINUTES });
 });
+
+// Set icon state on startup (service worker restart)
+updateIconState();
 
 // Ensure alarms exist on startup
 chrome.alarms.get('flushEvents', (alarm) => {
@@ -47,8 +51,18 @@ chrome.alarms.get('validateLicense', (alarm) => {
 
 // --- Consent helper ---
 async function checkConsent() {
-  const result = await chrome.storage.local.get(['consent_given', 'data_collection_active']);
-  return result.consent_given === true && result.data_collection_active !== false;
+  const result = await chrome.storage.local.get(['consent_given', 'data_collection_active', 'isPro']);
+  return result.isPro === true || (result.consent_given === true && result.data_collection_active !== false);
+}
+
+// --- Icon state: grey out when inactive, full colour when active ---
+const ICONS_ACTIVE = { 16: 'icon16.png', 48: 'icon48.png', 128: 'icon128.png' };
+const ICONS_INACTIVE = { 16: 'icon16-inactive.png', 48: 'icon48-inactive.png', 128: 'icon128-inactive.png' };
+
+async function updateIconState() {
+  const active = await checkConsent();
+  chrome.action.setIcon({ path: active ? ICONS_ACTIVE : ICONS_INACTIVE });
+  chrome.action.setTitle({ title: active ? '@Filter™' : '@Filter™ — inactive (enable data sharing to use)' });
 }
 
 // --- Message listener: accept events from content.js / popup.js / onboarding / settings ---
@@ -64,10 +78,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     sendResponse({ queued: true });
   } else if (msg.type === 'startDataCollection') {
-    chrome.storage.local.set({ data_collection_active: true, telemetry_enabled: true });
+    chrome.storage.local.set({ data_collection_active: true, telemetry_enabled: true }, updateIconState);
     sendResponse({ ok: true });
   } else if (msg.type === 'stopDataCollection') {
-    chrome.storage.local.set({ data_collection_active: false, telemetry_enabled: false });
+    chrome.storage.local.set({ data_collection_active: false, telemetry_enabled: false }, updateIconState);
     sendResponse({ ok: true });
   }
   return true;
