@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "@Filter",
   "version": "1.1",
-  "description": "@Filter™ - powerful content blocking, powering @Map™, the global sentiment platform",
+  "description": "@Filter - Keyword-based content filtering, powering @Map™, a global sentiment platform",
   "options_ui": {
     "page": "settings.html",
     "open_in_tab": true
