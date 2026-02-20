@@ -1,4 +1,4 @@
-# @ Filter & @ Map Privacy Policy
+# @ Filter™ & @ Map™ Privacy Policy
 
 **Effective Date:** [Current Date]
 
@@ -6,41 +6,49 @@
 
 ---
 
-## Welcome to @ Filter & @ Map
+## Welcome to @ Filter™ & @ Map™
 
-@ Filter is a browser extension that provides content filtering. When you use @ Filter, you can choose to contribute anonymous data to @ Map, a community-powered sentiment platform that fundamentally requires essential data contribution. Collectively, our voices are heard around the globe.
+@ Filter™ is a browser extension that provides content filtering. When you use @ Filter™, you can choose to participate in @ Map™, a community-powered sentiment platform that fundamentally requires community participation through anonymous data sharing. Collectively, our voices are heard around the globe.
 
 This Privacy Policy explains what information we collect, how we use it, how we protect it, and your rights and choices.
 
 ---
 
-## 1. The @ Filter & @ Map Model
+## 1. The @ Filter™ & @ Map™ Model
 
-### What @ Filter Is
+### What @ Filter™ Is
 
-@ Filter is a browser extension that blocks unwanted content, providing you with a cleaner, more focused browsing experience.
+@ Filter™ is a browser extension that blocks unwanted content, providing you with a cleaner, more focused browsing experience.
 
-### What @ Map Is
+### What @ Map™ Is
 
-@ Map is a community-powered sentiment platform. When you use @ Filter, you can choose to join the global @ Map community by contributing anonymous data about your content filtering choices. This data is aggregated to create real-time visualizations showing what content people are blocking worldwide.
+@ Map™ is a community-powered sentiment platform. When you use @ Filter™, you can choose to join the global @ Map™ community through anonymous data participation. Your filtering choices are aggregated to create real-time visualizations showing what content people are blocking worldwide.
 
 ### The Relationship
 
-@ Filter powers @ Map. Your use of the extension can contribute to the collective intelligence of the platform.
+@ Filter™ powers @ Map™. Your use of the extension can contribute to the collective intelligence of the platform through community participation.
 
 ### Why We Collect Data
 
-@ Map fundamentally requires essential data contribution to function. Without community participation from @ Filter users and other sources, @ Map cannot exist. There is no map without the data.
+@ Map™ fundamentally requires community participation to function. Anonymous data participation from @ Filter™ users and other sources creates @ Map™. The map is the data.
+
+**Default Opt-In:** When you install @ Filter™ and accept the Terms and Privacy Policy, you are automatically opted in for community participation in @ Map™. This default opt-in enables @ Filter™ to provide the full @ Map™ experience immediately. You can opt-out at any time through Settings.
 
 ### The Value Exchange
 
-- **You Receive:** @ Filter (free, powerful content filtering tool) + access to @ Map global visualizations
-- **You Contribute:** Anonymous data about what types of content you filter
-- **The World Gets:** @ Map insights into collective online behavior and sentiment
+- **You Receive:** @ Filter™ (free, powerful content filtering tool) + access to @ Map™ global visualizations
+- **You Contribute:** Anonymous data about what types of content you filter (opt-in by default)
+- **The World Gets:** @ Map™ insights into collective online behavior and sentiment
 
 ---
 
 ## 2. Information We Collect
+
+### When Data Collection Begins
+
+**Default Opt-In:** When you install @ Filter™ and accept the Terms and Privacy Policy during the onboarding process, you automatically consent to community participation in @ Map™ through anonymous data sharing. This default opt-in setting begins data collection immediately and enables full @ Map™ features.
+
+You can opt-out at any time through @ Filter™ Settings, though this will limit @ Map™ visualization features. See Section 6 for details on your control options.
 
 ### 2.1 What We DO Collect (Anonymous Only)
 
@@ -64,32 +72,32 @@ We collect the following anonymized information:
 - **Operating system** (e.g., Windows, macOS) for compatibility purposes
 - **Extension version** to ensure you have the latest features
 
-### 2.2 What We DO NOT Collect
+### 2.2 What We Protect (Not Collected)
 
-We explicitly and intentionally do NOT collect:
+We're committed to your privacy. Here's what we specifically exclude from collection:
 
-❌ Your name, email address, or any personal identifiers  
-❌ Your complete browsing history  
-❌ Specific URLs you visit  
-❌ Content of web pages you view  
-❌ Passwords or form data  
-❌ Information from incognito/private browsing  
-❌ Data that could identify you as an individual  
+✅ Your name, email address, or any personal identifiers  
+✅ Your complete browsing history  
+✅ Specific URLs you visit  
+✅ Content of web pages you view  
+✅ Passwords or form data  
+✅ Information from incognito/private browsing  
+✅ Data that could identify you as an individual  
 
-### 2.3 No Account Required
+### 2.3 Simple, Account-Free
 
-@ Map does not require account creation. We do not collect or store:
-- Usernames
-- Passwords
-- Email addresses
-- Phone numbers
-- Payment information (service is free)
+@ Map™ works immediately without account creation. This means:
+- No usernames needed
+- No passwords to remember
+- No email addresses required
+- No phone numbers requested
+- No payment information (service is free)
 
 ---
 
 ## 3. How We Use Your Information
 
-### 3.1 Creating the @ Map Visualization
+### 3.1 Creating the @ Map™ Visualization
 
 Your anonymized data contributes to:
 
@@ -108,7 +116,7 @@ We aggregate and analyze data to understand:
 
 ### 3.3 API Services
 
-We provide aggregated, anonymized data through our @ Map API to:
+We provide aggregated, anonymized data through our @ Map™ API to:
 
 **Who Has Access:**
 - Academic researchers studying online behavior
@@ -124,7 +132,7 @@ We provide aggregated, anonymized data through our @ Map API to:
 - Category-level information (generalized, not specific)
 
 **Revenue Model:**
-API access is a paid service that supports @ Map's operation and keeps the extension free for users.
+API access is a paid service that supports @ Map™'s operation and keeps the extension free for users.
 
 ### 3.4 Service Improvement
 
@@ -143,19 +151,19 @@ We use aggregated data to:
 We employ advanced privacy protection techniques including:
 
 **Geographic Aggregation:**
-- Data is only reported for regions with minimum 100 active users
-- Individual cities or neighborhoods are never shown in isolation
-- Sparse data is excluded to prevent re-identification
+- Data reports only for regions with 100+ active users
+- Individual cities blend into larger regional patterns
+- Sparse areas protected by minimum threshold
 
 **Temporal Binning:**
-- Activity is aggregated into hourly time windows
-- Precise timestamps are never stored or shared
-- Patterns are smoothed to prevent timing-based identification
+- Activity groups into hourly time windows
+- Timestamps aggregate for pattern analysis
+- Smoothing prevents timing-based identification
 
 **Category Generalization:**
-- Specific filter rules are mapped to broad categories
-- Unusual or rare filtering patterns are excluded
-- Only common categories appear in public data
+- Specific filter rules map to broad categories
+- Unusual patterns filter out automatically
+- Common categories form the public dataset
 
 **Noise Injection:**
 - Random statistical noise is added to all counts
@@ -170,9 +178,9 @@ We employ advanced privacy protection techniques including:
 ### 4.2 Technical Security
 
 **Data in Transit:**
-- All data transmitted using TLS encryption
-- Secure HTTPS connections only
-- No unencrypted data transmission
+- TLS encryption for all data transmission
+- HTTPS connections throughout
+- Secure communication channels
 
 **Data at Rest:**
 - Encrypted database storage
@@ -180,16 +188,16 @@ We employ advanced privacy protection techniques including:
 - Regular security audits
 
 **Data Minimization:**
-- We collect only what's necessary
-- Raw data is immediately aggregated
-- Individual-level data is not retained long-term
+- Collection limited to essentials
+- Immediate aggregation of raw data
+- Storage focuses on aggregated patterns
 
-### 4.3 No Cross-Site Tracking
+### 4.3 Privacy-First Design
 
-- @ Map does not track you across websites
-- No tracking cookies or pixels
-- No integration with advertising networks
-- No data sharing with ad platforms
+- @ Filter™ operates only on pages where you choose to use it
+- Uses no tracking cookies or pixels
+- Independent from advertising networks
+- Zero integration with ad platforms
 
 ---
 
@@ -207,16 +215,16 @@ We employ advanced privacy protection techniques including:
 - Analytics tools (using anonymized data only)
 - Security services (to protect the platform)
 
-All service providers are contractually obligated to protect data and use it only for @ Map purposes.
+All service providers are contractually obligated to protect data and use it only for @ Map™ purposes.
 
-### 5.2 What We Never Share
+### 5.2 Core Privacy Commitments
 
-We NEVER:
-- ❌ Sell individual user data
-- ❌ Share personally identifiable information
-- ❌ Provide data to advertising networks
-- ❌ Allow re-identification of users
-- ❌ Share raw, non-anonymized data
+**@ Map™ is built on these principles:**
+- ✅ Aggregate data only—individuals remain invisible
+- ✅ Anonymous patterns, not personal profiles
+- ✅ Independent from advertising ecosystems  
+- ✅ Re-identification actively prevented
+- ✅ Data stays aggregated and anonymized
 
 ### 5.3 Legal Requirements
 
@@ -234,50 +242,61 @@ Even in these cases, we can only provide the anonymized, aggregated data we actu
 
 ### 6.1 Opt-Out at Any Time
 
-You have complete control over data contribution:
+When you install @ Filter™ and accept the Terms and Privacy Policy, you are automatically opted in for community participation in @ Map™. This is the default setting that enables the full @ Map™ experience.
+
+You have complete control to change this at any time:
 
 **How to Opt-Out:**
-1. Open @ Map Settings
-2. Toggle "Data Contribution" to OFF
+1. Open @ Filter™ Settings
+2. Toggle "Community Participation" to OFF
 3. Confirm your choice
 
-**What Happens When You Opt-Out:**
-- ✅ Your filtering tool continues to work
-- ✅ You can still block content
-- ❌ @ Map visualization features will be limited
-- ❌ You won't see regional sentiment insights
-- ❌ Trending patterns will be unavailable
+**What Happens Based on Your Choice:**
+
+**With Community Participation (default):**
+- ✅ @ Filter™ extension fully functional
+- ✅ Content filtering active
+- ✅ @ Map™ visualization features enabled
+- ✅ Regional sentiment insights available
+- ✅ Trending patterns visible
+
+**Without Participation:**
+- ⚪ @ Filter™ extension becomes inactive (greyed out)
+- ⚪ Content filtering deactivated
+- ⚪ @ Map™ features unavailable
+
+**Why:** @ Filter™ and @ Map™ fundamentally require community participation to function as a community-powered platform.
 
 **Re-Enabling:**
-You can turn data contribution back ON at any time in Settings.
+You can turn community participation back ON at any time in Settings to restore full functionality.
 
 ### 6.2 View Your Contributed Data
 
 You can request to see what categories of data you've contributed:
 
-1. Go to @ Map Settings
+1. Go to @ Filter™ Settings
 2. Click "View My Contributed Data"
 3. See aggregated categories you've filtered
 
-Note: Because we use differential privacy, the data shown is generalized and may not exactly match every individual action.
+Note: Differential privacy creates general patterns from your data, showing broad trends rather than specific actions.
 
 ### 6.3 Request Data Deletion
 
 You can request deletion of your contributed data:
 
-1. Go to @ Map Settings
+1. Go to @ Filter™ Settings
 2. Click "Request Data Deletion"
 3. Confirm deletion
 
-**Important:** 
-- Because data is immediately aggregated and anonymized, individual contributions cannot be "extracted" from aggregate statistics
-- Deletion means we stop collecting new data from you
-- Historical aggregate statistics that included your data will remain (as they cannot be de-aggregated)
-- This is similar to how Google Trends cannot remove your specific search from trend data
+**How Deletion Works with Anonymized Data:** 
+- Data becomes anonymous the moment it's collected through aggregation
+- Deletion stops all future data collection from your installation
+- Historical aggregates (which blend thousands of users) remain part of @ Map™
+- This is how all anonymous analytics platforms work (Google Trends, Waze, etc.)
 
 ### 6.4 Uninstall
 
-You can uninstall @ Map at any time:
+You can uninstall @ Filter™ at any time:
 - All local data is immediately removed
 - Data collection stops instantly
 - You can reinstall later if you choose
@@ -294,7 +313,7 @@ You can uninstall @ Map at any time:
 - Never retained long-term
 
 **Aggregated Data:**
-- Retained indefinitely to maintain historical @ Map visualizations
+- Retained indefinitely to maintain historical @ Map™ visualizations
 - Forms the permanent research dataset
 - Cannot be de-aggregated to identify individuals
 
@@ -304,21 +323,21 @@ You can uninstall @ Map at any time:
 
 ### 7.2 No Persistent Identifiers
 
-@ Map does not assign you a permanent user ID or account identifier. Each session is treated independently and anonymously.
+@ Map™ does not assign you a permanent user ID or account identifier. Each session is treated independently and anonymously.
 
 ---
 
-## 8. Children's Privacy
+## 8. Age Requirements
 
-@ Map is not directed to children under 18. We do not knowingly collect data from children. If you are under 18, please do not use @ Map.
+@ Map™ is designed for users 18 and older. The service focuses on adult internet usage patterns. If you're under 18, we ask that you explore other browsing tools designed for younger users.
 
-If we learn we have collected information from a child under 18, we will delete it immediately.
+If we learn information was collected from someone under 18, we'll remove it promptly.
 
 ---
 
 ## 9. International Data Transfers
 
-@ Map is operated from the United States. If you use @ Map from outside the U.S., your information may be transferred to, stored, and processed in the United States.
+@ Filter™ and @ Map™ are operated from the United States. If you use the Service from outside the U.S., your information may be transferred to, stored, and processed in the United States.
 
 We implement appropriate safeguards to protect your information regardless of where it is processed, including:
 - Standard contractual clauses
@@ -334,10 +353,10 @@ We may update this Privacy Policy from time to time. Changes will be posted with
 
 **We will notify you of material changes by:**
 - In-extension notification
-- Prominent notice on @ Map website
+- Prominent notice on @ Map™ website
 - Email (if we have your email for other reasons)
 
-Continued use of @ Map after changes constitutes acceptance of the updated policy.
+Continued use of @ Map™ after changes constitutes acceptance of the updated policy.
 
 ---
 
@@ -345,7 +364,7 @@ Continued use of @ Map after changes constitutes acceptance of the updated polic
 
 ### 11.1 No Third-Party Tracking
 
-@ Map does not integrate with:
+@ Map™ does not integrate with:
 - Social media platforms
 - Advertising networks
 - Analytics trackers (beyond our own anonymous analytics)
@@ -353,7 +372,7 @@ Continued use of @ Map after changes constitutes acceptance of the updated polic
 
 ### 11.2 Links to Other Services
 
-@ Map may contain links to external websites or services:
+@ Map™ may contain links to external websites or services:
 - We are not responsible for their privacy practices
 - Review their privacy policies before providing information
 - Our policy does not apply to third-party sites
@@ -375,14 +394,15 @@ If you are a California resident, you have additional rights:
 **Right to Opt-Out:**
 - Opt out of data collection (see Section 6.1)
 
-**No Sale of Personal Information:**
-- We do not sell personal information as defined by CCPA
-- We provide aggregated, anonymized data through our API
-- This is not considered a "sale" under CCPA
+**Our Data Model:**
+- @ Map™ provides aggregated insights through API partnerships
+- Personal information stays protected and anonymous
+- This research-focused model differs from data selling
+- CCPA recognizes this distinction
 
-**No Discrimination:**
-- We will not discriminate against you for exercising your rights
-- @ Map features may be limited if you opt out (as the service requires data to function)
+**Your Rights Protected:**
+- @ Map™ respects all CCPA rights
+- Feature availability depends on participation (as @ Map™ requires data to function)
 
 ---
 
@@ -391,7 +411,7 @@ If you are a California resident, you have additional rights:
 If you are in the European Economic Area, UK, or Switzerland:
 
 **Legal Basis for Processing:**
-- Necessary for the performance of our service (data contribution is essential to @ Map)
+- Necessary for the performance of our service (community participation is essential to @ Map™)
 - Legitimate interests in research and analysis
 - Your consent (freely given, can be withdrawn)
 
@@ -418,7 +438,7 @@ If you have questions about this Privacy Policy or your data:
 **Email:** privacy@atmap.io
 
 **Mail:**
-@ Map Privacy Team
+@ Map™ Privacy Team
 [Your Business Address]
 
 **Data Protection Officer:**
@@ -445,25 +465,25 @@ We publish annual statistics about:
 Our anonymization methodology is documented and auditable.
 
 **Research Publications:**
-We support independent research about @ Map's privacy practices.
+We support independent research about @ Map™'s privacy practices.
 
 ---
 
-## 16. Summary (TL;DR)
+## 16. Quick Overview
 
-**What we collect:** Anonymous filtering categories, approximate location, timing  
-**What we DON'T collect:** Your identity, specific URLs, browsing history  
-**Why we collect:** To create the @ Map global sentiment visualization  
-**Who sees it:** API customers receive aggregated data only  
-**Your control:** Opt out anytime in Settings (limits features)  
-**Privacy tech:** Differential privacy ensures no individual can be identified  
-**Business model:** API revenue keeps the extension free for you  
+**We collect:** Anonymous filtering categories, approximate location, timing patterns  
+**We protect:** Your identity, specific URLs, complete browsing history stay private  
+**We create:** @ Map™ global sentiment visualization through community participation  
+**API access:** Research partners receive only aggregated data  
+**Your choice:** Full control through Settings (affects @ Map™ features)  
+**Privacy technology:** Differential privacy protects individual anonymity  
+**Free service:** API partnerships keep @ Filter™ free for everyone  
 
-**Bottom line:** @ Map requires community data contribution to function. We're transparent about what we collect, how we protect it, and how it's used. You have complete control.
+**Our commitment:** @ Map™ operates through community participation with anonymous data sharing. We're transparent about collection, protection, and use. You maintain complete control.
 
 ---
 
-**Thank you for being part of the @ Map community.**
+**Thank you for being part of the @ Map™ community.**
 
 ---
 

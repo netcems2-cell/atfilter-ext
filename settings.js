@@ -11,11 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnViewData = document.getElementById('btn-view-data');
   const btnDeleteData = document.getElementById('btn-delete-data');
 
-  let isPro = false;
-
   // Load current state
-  chrome.storage.local.get(['data_collection_active', 'consent_given', 'isPro'], (result) => {
-    isPro = result.isPro || false;
+  chrome.storage.local.get(['data_collection_active', 'consent_given'], (result) => {
     const isActive = result.consent_given === true && result.data_collection_active !== false;
     toggle.checked = isActive;
     updateStatusDisplay(isActive);
@@ -40,26 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function updateWarningContent() {
-    if (isPro) {
-      // Pro: only lose @Map™ features, filtering continues
-      warningList.innerHTML = `
-        <li>Live @Map™ visualization</li>
-        <li>Regional sentiment insights</li>
-        <li>Trending filter patterns</li>
-        <li>Community features</li>
-      `;
-      btnConfirm.textContent = 'I Understand \u2014 Disable Data Sharing';
-    } else {
-      // Free: extension fully deactivated
-      warningList.innerHTML = `
-        <li>Content filtering will stop working</li>
-        <li>Live @Map™ visualization</li>
-        <li>Regional sentiment insights</li>
-        <li>Trending filter patterns</li>
-        <li>Community features</li>
-      `;
-      btnConfirm.textContent = 'I Understand \u2014 Deactivate @Filter™';
-    }
+    warningList.innerHTML = `
+      <li>Content filtering will stop working</li>
+      <li>Live @Map™ visualization</li>
+      <li>Regional sentiment insights</li>
+      <li>Trending filter patterns</li>
+      <li>Community features</li>
+    `;
+    btnConfirm.textContent = 'I Understand \u2014 Disconnect @Filter\u2122';
   }
 
   // Confirm disable
@@ -69,11 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       warningBox.style.display = 'none';
       toggle.checked = false;
       updateStatusDisplay(false);
-      if (isPro) {
-        showToast('Data sharing disabled. Filtering still works.');
-      } else {
-        showToast('@Filter™ deactivated. Re-enable data sharing to restore filtering.');
-      }
+      showToast('@Filter™ disconnected from filter feed. Re-enable community participation to reconnect.');
     });
   });
 
@@ -101,10 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateStatusDisplay(active) {
     if (active) {
       statusDot.className = 'status-dot active';
-      statusText.textContent = 'Data sharing is active';
+      statusText.textContent = 'Community participation is active';
     } else {
       statusDot.className = 'status-dot inactive';
-      statusText.textContent = isPro ? 'Data sharing is paused' : '@Filter™ is inactive — enable data sharing to use';
+      statusText.textContent = '@Filter™ is disconnected — enable community participation to reconnect';
     }
   }
 

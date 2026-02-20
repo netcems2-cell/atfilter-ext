@@ -8,7 +8,9 @@ Implement the complete onboarding and consent system for @ Filter browser extens
 ## Product Context
 @ Filter is a content filtering browser extension. @ Map is a community-powered sentiment platform that fundamentally requires essential data contribution. Collectively, our voices are heard around the globe. 
 
-@ Filter users can choose to contribute anonymous filtering data to power @ Map. Users must consent during installation, with the option to opt-out later (though this limits @ Map features).
+@ Filter™ users can choose to contribute anonymous filtering data to power @ Map™. Users must consent during installation. 
+
+**Important:** If users opt-out of community participation, the entire @ Filter™ extension becomes inactive (greyed out). @ Filter™ and @ Map™ fundamentally require community participation to function.
 
 ---
 
@@ -78,13 +80,17 @@ Implement the complete onboarding and consent system for @ Filter browser extens
 **Location:** `/settings.html`
 
 **Requirements:**
-- Add "Data Contribution" section
-- Toggle switch for enabling/disabling data sharing (default ON)
+- Add "Community Participation" section
+- Toggle switch: "Participate in @ Map™" (default ON - users are opted in by installation)
 - Warning box (initially hidden) that shows when user tries to opt-out
-- Warning explains which features will be limited
+- **Warning explains the entire @ Filter™ extension will be deactivated (greyed out)**
 - Confirmation flow: user must explicitly confirm opt-out
 - "View My Contributed Data" button
 - "Request Data Deletion" button
+
+**Important:** The default state is ON (opted in) because accepting Terms during installation = automatic consent to anonymous data participation. Opting out deactivates the entire extension as @ Filter™ and @ Map™ fundamentally require community participation.
+
+**Label for toggle:** "Community Participation" or "Participate in @ Map™"
 
 **Add the settings section HTML I provided in previous response.**
 
@@ -94,15 +100,12 @@ Implement the complete onboarding and consent system for @ Filter browser extens
 **Requirements:**
 - Load current data_collection_active state on page load
 - When toggle switched OFF: show warning (don't actually disable yet)
-- Warning lists features that will be limited:
-  - Live @ Map visualization
-  - Regional sentiment insights
-  - Trending filter patterns
-  - Community features
-- "I Understand - Disable Data Sharing" button confirms opt-out
+- **Warning explains: The entire @ Filter™ extension will be deactivated (greyed out) if you opt out. @ Filter™ and @ Map™ fundamentally require community participation to function.**
+- "I Understand - Deactivate Extension" button confirms opt-out
 - "Keep Contributing" button cancels
+- On opt-out confirmation: Set data_collection_active to false AND disable all extension functionality
 - Toast notifications for state changes
-- Communicate with background script
+- Communicate with background script to deactivate extension
 
 **Use the JavaScript I provided in previous response.**
 
