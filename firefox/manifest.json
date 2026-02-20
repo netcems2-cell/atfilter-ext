@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "@Filter™",
+  "name": "@Filter",
   "version": "1.1",
   "description": "@Filter™ - powerful content blocking, powering @Map™, the global sentiment platform",
   "options_ui": {
