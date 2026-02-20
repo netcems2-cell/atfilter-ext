@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const warningList = document.getElementById('warning-list');
   const btnConfirm = document.getElementById('btn-confirm-disable');
   const btnCancel = document.getElementById('btn-cancel');
-  const btnViewData = document.getElementById('btn-view-data');
   const btnDeleteData = document.getElementById('btn-delete-data');
 
   // Load current state
@@ -63,11 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     warningBox.style.display = 'none';
     toggle.checked = true;
     showToast('Great! Data sharing remains active.');
-  });
-
-  // View contributed data
-  btnViewData.addEventListener('click', () => {
-    showToast('Feature coming soon — check @Map™ for your regional data.');
   });
 
   // Request data deletion

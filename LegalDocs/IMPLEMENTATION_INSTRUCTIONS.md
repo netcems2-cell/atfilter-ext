@@ -85,7 +85,6 @@ Implement the complete onboarding and consent system for @ Filter browser extens
 - Warning box (initially hidden) that shows when user tries to opt-out
 - **Warning explains the entire @ Filter™ extension will be deactivated (greyed out)**
 - Confirmation flow: user must explicitly confirm opt-out
-- "View My Contributed Data" button
 - "Request Data Deletion" button
 
 **Important:** The default state is ON (opted in) because accepting Terms during installation = automatic consent to anonymous data participation. Opting out deactivates the entire extension as @ Filter™ and @ Map™ fundamentally require community participation.

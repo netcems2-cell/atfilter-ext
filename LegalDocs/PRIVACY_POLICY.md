@@ -270,15 +270,9 @@ You have complete control to change this at any time:
 **Re-Enabling:**
 You can turn community participation back ON at any time in Settings to restore full functionality.
 
-### 6.2 View Your Contributed Data
+### 6.2 Your Contributed Data
 
-You can request to see what categories of data you've contributed:
-
-1. Go to @ Filter™ Settings
-2. Click "View My Contributed Data"
-3. See aggregated categories you've filtered
-
-Note: Differential privacy creates general patterns from your data, showing broad trends rather than specific actions.
+All data is immediately anonymized and aggregated without persistent identifiers, so individual contributions cannot be retrieved or viewed. Section 2 describes the categories of data collected. You can contact us at privacy@atfilter.com with any questions about our data practices.
 
 ### 6.3 Request Data Deletion
 
