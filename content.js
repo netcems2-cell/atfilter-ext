@@ -2,24 +2,40 @@
   'use strict';
 
 
-  const FREE_KEYWORD_LIMIT = 5;
   let filterKeywords = [];
-  let isPro = false;
   let processedElements = new WeakSet();
+
+  // --- Consent & activation state ---
+  // Extension only works when consent is active (data_collection_active)
+  let extensionActive = false;
 
   // --- Signal Engine telemetry state ---
   let sessionId = null;
   let telemetryEnabled = false;
-  chrome.storage.local.get(['session_id', 'telemetry_enabled', 'isPro'], (result) => {
+  chrome.storage.local.get(['session_id', 'telemetry_enabled', 'consent_given', 'data_collection_active'], (result) => {
     sessionId = result.session_id || null;
     telemetryEnabled = result.telemetry_enabled || false;
-    isPro = result.isPro || false;
+    extensionActive = result.consent_given === true && result.data_collection_active !== false;
   });
   chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local') {
       if (changes.telemetry_enabled) telemetryEnabled = changes.telemetry_enabled.newValue || false;
       if (changes.session_id) sessionId = changes.session_id.newValue || null;
-      if (changes.isPro) isPro = changes.isPro.newValue || false;
+      if (changes.data_collection_active || changes.consent_given) {
+        // Re-evaluate whether extension should be active
+        chrome.storage.local.get(['consent_given', 'data_collection_active'], (result) => {
+          const wasActive = extensionActive;
+          extensionActive = result.consent_given === true && result.data_collection_active !== false;
+          if (extensionActive && !wasActive) {
+            // Re-enable: re-run filtering
+            filterContent();
+          } else if (!extensionActive && wasActive) {
+            // Deactivate: unhide everything
+            unhideAll();
+            showFilterBadge('@Filter™ disconnected — enable community participation to reconnect', 4000);
+          }
+        });
+      }
     }
   });
 
@@ -487,6 +503,7 @@
   // --- Main filter ---
 
   function filterContent() {
+    if (!extensionActive) return;
     if (filterKeywords.length === 0) return;
     const t0 = performance.now();
     let filteredCount = 0;
@@ -540,23 +557,21 @@
   // --- Init ---
 
   function init() {
-    console.log('[ATfilter] v1.0 initializing...');
-    chrome.storage.local.get(['filterKeywords', 'isPro'], (result) => {
-      isPro = result.isPro || false;
+    chrome.storage.local.get(['filterKeywords', 'consent_given', 'data_collection_active'], (result) => {
+      extensionActive = result.consent_given === true && result.data_collection_active !== false;
+
+      if (!extensionActive) {
+        showFilterBadge('@Filter™ disconnected — enable community participation to reconnect', 3000);
+        return;
+      }
+
       if (result.filterKeywords && result.filterKeywords.length > 0) {
-        let kws = result.filterKeywords.map(k => k.toLowerCase().trim());
-        if (!isPro && kws.length > FREE_KEYWORD_LIMIT) {
-          kws = kws.slice(0, FREE_KEYWORD_LIMIT);
-        }
-        filterKeywords = kws;
-        console.log('[ATfilter] Active with keywords:', filterKeywords);
+        filterKeywords = result.filterKeywords.map(k => k.toLowerCase().trim());
         filterContent();
         setupObserver();
-        const tierLabel = isPro ? 'Pro' : 'Free';
-        showFilterBadge(`ATfilter v1.1 ${tierLabel} ✓ ${filterKeywords.length} keywords`, 2500);
+        showFilterBadge(`@Filter™ v1.1 — ${filterKeywords.length} keywords`, 2500);
       } else {
-        console.log('[ATfilter] No keywords configured');
-        showFilterBadge('ATfilter v1.1 — no keywords set', 2500);
+        showFilterBadge('@Filter™ v1.1 — no keywords set', 2500);
       }
     });
   }
@@ -622,14 +637,11 @@
   // --- Storage listener ---
   chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local' && changes.filterKeywords) {
-      let kws = (changes.filterKeywords.newValue || []).map(k => k.toLowerCase().trim());
-      if (!isPro && kws.length > FREE_KEYWORD_LIMIT) {
-        kws = kws.slice(0, FREE_KEYWORD_LIMIT);
-      }
-      filterKeywords = kws;
+      filterKeywords = (changes.filterKeywords.newValue || []).map(k => k.toLowerCase().trim());
       unhideAll();
-      console.log('[ATfilter] Keywords updated:', filterKeywords);
-      filterContent();
+      if (extensionActive) {
+        filterContent();
+      }
     }
   });
 

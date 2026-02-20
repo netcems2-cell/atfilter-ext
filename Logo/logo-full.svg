@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="420" height="120">
+  <!-- @ symbol - Constantia Bold, #FF8C00, vertically centered -->
+  <text x="5" y="90" font-family="Constantia, 'Palatino Linotype', Palatino, Georgia, serif" font-weight="bold" font-size="80" fill="#FF8C00">@</text>
+  <!-- Filter - Georgia Bold, #595959, vertically centered with @ -->
+  <text x="72" y="85" font-family="Georgia, 'Palatino Linotype', Palatino, serif" font-weight="bold" font-size="52" fill="#595959">Filter</text>
+  <!-- TM superscript - Constantia Bold, #595959, small trademark -->
+  <text x="283" y="40" font-family="Constantia, 'Palatino Linotype', Palatino, Georgia, serif" font-weight="bold" font-size="16" fill="#595959">TM</text>
+</svg>

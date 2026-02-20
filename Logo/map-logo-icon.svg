@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- @ symbol - Constantia Bold, #FF8C00 -->
+  <text x="5" y="90" font-family="Constantia, 'Palatino Linotype', Palatino, Georgia, serif" font-weight="bold" font-size="80" fill="#FF8C00">@</text>
+  <!-- TM superscript - Constantia Bold, #595959, tight after @ -->
+  <text x="80" y="30" font-family="Constantia, 'Palatino Linotype', Palatino, Georgia, serif" font-weight="bold" font-size="16" fill="#595959">TM</text>
+</svg>
