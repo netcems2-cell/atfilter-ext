@@ -53,5 +53,22 @@ https://atfilter.com
 ## Single Purpose Description
 @Filter blocks web content (articles, videos, posts) whose headlines contain user-specified keywords.
 
+## Permission Justifications
+
+### storage
+Stores the user's keyword list and extension settings (community participation toggle, onboarding state) locally in the browser.
+
+### activeTab
+Allows the extension to interact with the current tab when the user clicks the extension icon to apply or update keyword filters.
+
+### alarms
+Schedules periodic checks to sync filtering state and manage community participation status.
+
+### host_permissions: <all_urls>
+The extension must run on all websites to scan headlines and hide content matching the user's keywords. Content filtering cannot work without access to page content across all sites. No page content or URLs are collected — all filtering runs locally in the browser.
+
+### content_scripts: <all_urls>
+Injects the content filtering script on every page to detect and hide elements whose headlines match user-specified keywords. This is the core functionality of the extension.
+
 ## Icon
 Use: icon128.png (128x128, orange @ symbol)
