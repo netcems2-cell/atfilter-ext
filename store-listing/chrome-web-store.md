@@ -36,7 +36,7 @@ PERMISSIONS EXPLAINED
 • "Storage" — Saves your keyword list and settings locally in your browser.
 
 SUPPORT
-Visit our website at atfilter.com or email legal@atfilter.com
+Visit our website at atfilter.com or email support@atfilter.com
 
 ## Category
 Productivity

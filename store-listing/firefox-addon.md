@@ -30,7 +30,7 @@ Add keywords to your filter list, and @Filter automatically hides articles, vide
 
 **Free forever** — no premium tiers, no ads, no hidden costs.
 
-**Support:** atfilter.com | legal@atfilter.com
+**Support:** atfilter.com | support@atfilter.com
 
 ## Category
 Security & Privacy
@@ -45,4 +45,4 @@ https://atfilter.com/privacy
 https://atfilter.com
 
 ## Support Email
-legal@atfilter.com
+support@atfilter.com

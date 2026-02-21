@@ -50,7 +50,7 @@ In both documents, replace:
 In both documents, add your actual:
 - Company name
 - Business address
-- Email addresses (privacy@atmap.io, legal@atmap.io, support@atmap.io)
+- Email addresses (legal@atfilter.com, support@atfilter.com)
 - Phone number (optional)
 
 **4. Legal Review (Recommended):**

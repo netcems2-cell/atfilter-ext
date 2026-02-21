@@ -369,7 +369,7 @@ Upon termination:
 ### 11.1 Informal Resolution
 
 Before formal proceedings, we agree to attempt informal resolution:
-- Contact us at legal@atmap.io
+- Contact us at legal@atfilter.com
 - Describe the dispute clearly
 - Allow 30 days for good-faith negotiation
 
@@ -409,7 +409,7 @@ You and @ Map™ agree that any dispute arising from these Terms or the Service 
 - Individual arbitration only
 
 **Opt-Out Right:**
-You may opt out of this arbitration agreement by notifying us in writing within 30 days of first using @ Filter™. Send opt-out notice to: legal@atmap.io
+You may opt out of this arbitration agreement by notifying us in writing within 30 days of first using @ Filter™. Send opt-out notice to: legal@atfilter.com
 
 ### 11.4 Governing Law
 
