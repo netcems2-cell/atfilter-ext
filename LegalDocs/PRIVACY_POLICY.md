@@ -272,7 +272,7 @@ You can turn community participation back ON at any time in Settings to restore 
 
 ### 6.2 Your Contributed Data
 
-All data is immediately anonymized and aggregated without persistent identifiers, so individual contributions cannot be retrieved or viewed. Section 2 describes the categories of data collected. You can contact us at privacy@atfilter.com with any questions about our data practices.
+All data is immediately anonymized and aggregated without persistent identifiers, so individual contributions cannot be retrieved or viewed. Section 2 describes the categories of data collected. You can contact us at legal@atfilter.com with any questions about our data practices.
 
 ### 6.3 Request Data Deletion
 
@@ -429,14 +429,7 @@ You have the right to lodge a complaint with your local data protection authorit
 
 If you have questions about this Privacy Policy or your data:
 
-**Email:** privacy@atmap.io
-
-**Mail:**
-@ Map™ Privacy Team
-[Your Business Address]
-
-**Data Protection Officer:**
-dpo@atmap.io
+**Email:** legal@atfilter.com
 
 ### Response Time
 

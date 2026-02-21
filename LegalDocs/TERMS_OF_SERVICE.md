@@ -492,21 +492,7 @@ By using @ Filter™ and @ Map™, you specifically acknowledge and agree that:
 
 ### Questions or Concerns?
 
-**General Inquiries:**
-support@atmap.io
-
-**Privacy Questions:**
-privacy@atmap.io
-
-**Legal Matters:**
-legal@atmap.io
-
-**Mailing Address:**
-@ Map™
-[Your Business Name]
-[Street Address]
-[City, State ZIP]
-[Country]
+**Email:** legal@atfilter.com
 
 ### Response Time
 
