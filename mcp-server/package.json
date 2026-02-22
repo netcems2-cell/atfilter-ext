@@ -1,16 +1,42 @@
 {
   "name": "@atfilter/mcp-server",
   "version": "1.0.0",
-  "description": "MCP server for @Filter Signal Engine API",
+  "description": "MCP server for @Filter Signal Engine API — query content filtering intelligence via Claude Desktop, Cursor, or VS Code",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "atfilter-mcp": "dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "tsc"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "atfilter",
+    "content-filtering",
+    "signal-api",
+    "claude",
+    "cursor",
+    "vscode",
+    "ai-tools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netcems2-cell/atfilter-ext.git",
+    "directory": "mcp-server"
+  },
+  "homepage": "https://atfilter.com/portal/docs",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
