@@ -351,6 +351,39 @@ server.tool(
   },
 );
 
+// --- Tool: keyword activity ---
+server.tool(
+  "signals_keyword_activity",
+  "Shows which keywords users are adding, removing, or editing in their filter lists. " +
+    "Reveals user intent — which topics are gaining or losing interest. " +
+    "The net_adds field (adds minus removes) indicates whether a keyword is growing or shrinking in popularity.",
+  {
+    window: z
+      .enum(["1h", "6h", "12h", "24h", "7d", "30d"])
+      .default("24h")
+      .describe("Time window to aggregate over"),
+    type: z
+      .enum(["added", "removed", "edited", "all"])
+      .default("all")
+      .describe("Filter by event type, or 'all' for combined view"),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(500)
+      .default(50)
+      .describe("Maximum number of keywords to return"),
+  },
+  async ({ window, type, limit }) => {
+    const data = await apiGet("/api/v1/signals/keyword-activity", {
+      window,
+      type,
+      limit: limit.toString(),
+    });
+    return textResult(data);
+  },
+);
+
 // ---------------------------------------------------------------------------
 // Start
 // ---------------------------------------------------------------------------
