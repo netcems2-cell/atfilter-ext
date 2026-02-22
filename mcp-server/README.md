@@ -75,6 +75,7 @@ Add to `.vscode/mcp.json`:
 | `signals_domain_timeseries` | Track a domain's filtering activity over time |
 | `signals_query` | Flexible multi-dimension query (filter + group by any combination) |
 | `signals_trending` | Detect fastest-growing keywords, domains, platforms |
+| `signals_keyword_activity` | See which keywords users are adding or removing from filter lists |
 
 ## Example Prompts
 
